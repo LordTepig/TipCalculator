@@ -1,4 +1,4 @@
-package com.bowen.tipcalculatorpart1
+package com.bowen.tipcalculatorpart3
 
 import android.media.SubtitleData
 import androidx.appcompat.app.AppCompatActivity

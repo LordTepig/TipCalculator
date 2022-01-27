@@ -6,24 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.bowen.tipcalculatorpart1.databinding.FragmentMainBinding
+import com.bowen.tipcalculatorpart1.databinding.FragmentTipBinding
 
 
-class MainFragment : Fragment() {
+class TipFragment : Fragment() {
 
     var subTotal = 0
     var tipPercent = 0
 
-    private var _binding: FragmentMainBinding? = null
+    private var _binding: FragmentTipBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        _binding = FragmentTipBinding.inflate(inflater, container, false)
         val rootView = binding.root
-        subTotal = 100
+        val args =TipFragmentArgs.fromBundle(requireArguments())
+        subTotal = args.moneyArg
+        binding.subtotalAmountTextView.text = "$${subTotal.toString()}.00"
         setUpRadioButtons()
         setUpTipSeekBar()
         setUpNumOfGuestsSpinner()
