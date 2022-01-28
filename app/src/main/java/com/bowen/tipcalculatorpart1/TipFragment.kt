@@ -135,8 +135,8 @@ class TipFragment : Fragment() {
 
     fun setTipAndTotalTextViews() {
         binding.tipAmountTextView.text = " $tipPercent%"
-        val tipDollarAmount:Float = ((tipPercent.toDouble()).div(100).times(subTotal)).toFloat()
-        finalTotal = subTotal.plus(tipDollarAmount)
+        val tipDollarAmount = ((tipPercent.times(subTotal)).div(100))
+        finalTotal = subTotal + tipDollarAmount
         binding.totalWithTipTextView.text = " $${finalTotal}0"
     }
 }

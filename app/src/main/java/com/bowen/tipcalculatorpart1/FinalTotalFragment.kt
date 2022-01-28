@@ -24,8 +24,14 @@ class FinalTotalFragment : Fragment() {
         val args = FinalTotalFragmentArgs.fromBundle(requireArguments())
         val total = args.totalArg
         val numGuests = args.guestArg
-        binding.subtotalWithTipTextView.text = "${binding.subtotalWithTipTextView.text} $${total}0"
-        binding.amountForEachPersonTextView.text = "${binding.amountForEachPersonTextView.text} $${total/numGuests}0"
+        binding.subtotalWithTipTextView.text = "${binding.subtotalWithTipTextView.text} ${"$%.2f".format(total)}"
+        binding.amountForEachPersonTextView.text = "${binding.amountForEachPersonTextView.text} ${"$%.2f".format(total/numGuests)}"
+        binding.roundUpButton.setOnClickListener {
+            binding.amountForEachPersonTextView.text = "Each Person Owes: ${"$%.2f".format(Math.ceil((total/numGuests).toDouble()))}"
+        }
+        binding.roundDownButton.setOnClickListener {
+            binding.amountForEachPersonTextView.text = "Each Person Owes: ${"$%.2f".format(Math.floor((total/numGuests).toDouble()))}"
+        }
         return rootView
     }
 
