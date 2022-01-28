@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.navigation.findNavController
 import com.bowen.tipcalculatorpart1.databinding.FragmentTipBinding
 
 
 class TipFragment : Fragment() {
 
-    var subTotal = 0
+    var subTotal = 0.0
     var tipPercent = 0
+    var finalTotal = 0.0
+    var selectedNumGuests = ""
 
     private var _binding: FragmentTipBinding? = null
     private val binding get() = _binding!!
@@ -24,11 +27,18 @@ class TipFragment : Fragment() {
         _binding = FragmentTipBinding.inflate(inflater, container, false)
         val rootView = binding.root
         val args =TipFragmentArgs.fromBundle(requireArguments())
-        subTotal = args.moneyArg
+        subTotal = args.moneyArg.toDouble()
         binding.subtotalAmountTextView.text = "$${subTotal.toString()}.00"
         setUpRadioButtons()
         setUpTipSeekBar()
         setUpNumOfGuestsSpinner()
+        binding.nextButton.setOnClickListener {
+            val total = finalTotal.toFloat()
+            val numGuests = selectedNumGuests.toInt()
+
+            val action = TipFragmentDirections.actionTipFragmentToFinalTotalFragment(total,numGuests)
+            rootView.findNavController().navigate(action)
+        }
         return rootView
     }
 
@@ -109,7 +119,6 @@ class TipFragment : Fragment() {
             android.R.layout.simple_spinner_dropdown_item)
         binding.guestsSpinner.adapter = numGuestsArrayAdapter
         binding.guestsSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            var selectedNumGuests = ""
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long)
             {
                 selectedNumGuests = parent.getItemAtPosition(position).toString()
@@ -126,8 +135,8 @@ class TipFragment : Fragment() {
 
     fun setTipAndTotalTextViews() {
         binding.tipAmountTextView.text = " $tipPercent%"
-        val tipDollarAmount:Int = ((tipPercent.toDouble()).div(100).times(subTotal)).toInt()
-        val finalTotal = subTotal.plus(tipDollarAmount)
-        binding.totalWithTipTextView.text = " $$finalTotal.0"
+        val tipDollarAmount:Float = ((tipPercent.toDouble()).div(100).times(subTotal)).toFloat()
+        finalTotal = subTotal.plus(tipDollarAmount)
+        binding.totalWithTipTextView.text = " $${finalTotal}0"
     }
 }

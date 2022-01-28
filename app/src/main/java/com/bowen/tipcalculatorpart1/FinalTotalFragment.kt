@@ -21,6 +21,11 @@ class FinalTotalFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentFinalTotalBinding.inflate(inflater, container, false)
         val rootView = binding.root
+        val args = FinalTotalFragmentArgs.fromBundle(requireArguments())
+        val total = args.totalArg
+        val numGuests = args.guestArg
+        binding.subtotalWithTipTextView.text = "${binding.subtotalWithTipTextView.text} $${total}0"
+        binding.amountForEachPersonTextView.text = "${binding.amountForEachPersonTextView.text} $${total/numGuests}0"
         return rootView
     }
 

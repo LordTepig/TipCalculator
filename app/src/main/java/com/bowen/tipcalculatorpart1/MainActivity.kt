@@ -1,13 +1,9 @@
 package com.bowen.tipcalculatorpart3
 
-import android.media.SubtitleData
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
-import android.view.View
-import android.widget.*
+
 import com.bowen.tipcalculatorpart1.databinding.ActivityMainBinding
-import org.w3c.dom.Text
 
 
 

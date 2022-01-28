@@ -9,7 +9,7 @@
         android:id="@+id/subtotalFragment"
         android:name="com.bowen.tipcalculatorpart1.SubtotalFragment"
         android:label="fragment_subtotal"
-        tools:layout="@layout/fragment_subtotal" >
+        tools:layout="@layout/fragment_subtotal">
         <action
             android:id="@+id/action_subtotalFragment_to_tipFragment"
             app:destination="@id/tipFragment" />
@@ -18,7 +18,7 @@
         android:id="@+id/tipFragment"
         android:name="com.bowen.tipcalculatorpart1.TipFragment"
         android:label="fragment_tip"
-        tools:layout="@layout/fragment_tip" >
+        tools:layout="@layout/fragment_tip">
         <action
             android:id="@+id/action_tipFragment_to_finalTotalFragment"
             app:destination="@id/finalTotalFragment" />
@@ -30,5 +30,12 @@
         android:id="@+id/finalTotalFragment"
         android:name="com.bowen.tipcalculatorpart1.FinalTotalFragment"
         android:label="fragment_final_total"
-        tools:layout="@layout/fragment_final_total" />
+        tools:layout="@layout/fragment_final_total">
+        <argument
+            android:name="totalArg"
+            app:argType="float" />
+        <argument
+            android:name="guestArg"
+            app:argType="integer" />
+    </fragment>
 </navigation>

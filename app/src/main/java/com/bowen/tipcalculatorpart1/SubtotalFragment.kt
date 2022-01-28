@@ -15,6 +15,7 @@ class SubtotalFragment : Fragment() {
 
     private var _binding: FragmentSubtotalBinding? = null
     private val binding get() = _binding!!
+
     private var subtotal: Int = 0
     private lateinit var numButtonList : List<Button>
 
